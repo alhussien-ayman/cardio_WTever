@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const roleRadios = document.querySelectorAll('input[name="role"]');
     
     // Base API URL - replace with your actual API URL when deploying
-    const API_BASE_URL = 'http://cardiology-department-system.runasp.net/api';
+    const API_BASE_URL = 'https://cardiology-department-system.runasp.net/api';
     
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = 'index.html';
         }
     }
-    
+
     function capitalize(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }

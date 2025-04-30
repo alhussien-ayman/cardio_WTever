@@ -392,8 +392,7 @@ async function fetchData() {
   }
 }
 //=======================================================================
-//patient profile
-// Create dynamic bubbles
+//patient profile// Create dynamic bubbles
 function createBubbles() {
   const colors = ['rgba(247, 85, 109, 0.08)', 'rgba(109, 95, 247, 0.08)', 'rgba(95, 247, 178, 0.08)'];
   for (let i = 0; i < 8; i++) {
@@ -556,7 +555,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
 // Insurance Edit/Save functionality
 document.addEventListener('DOMContentLoaded', () => {
   const editBtn = document.querySelector('.edit-insurance-btn');
@@ -601,7 +599,6 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Insurance data saved');
   });
 });
-
 
 
 // Medical History Edit/Save Functionality
@@ -727,7 +724,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
 // Emergency Contact Editor
 document.addEventListener('DOMContentLoaded', () => {
   const editEmergencyBtn = document.querySelector('.edit-emergency-btn');
@@ -774,7 +770,6 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Emergency contact updated');
   });
 });
-
 
 
 
@@ -831,7 +826,6 @@ medicalInfoSaveBtn.addEventListener('click', () => {
       referredBy: referredByField.textContent
   });
 });
-
 
 
 // Emergency Contact Editor
@@ -900,7 +894,6 @@ emergencySaveBtn.addEventListener('click', () => {
 
 
 
-
 // Patient Photo Upload Functionality
 function initPatientPhotoUpload() {
   const photoUpload = document.createElement('input');
@@ -951,7 +944,6 @@ function initPatientPhotoUpload() {
 
 // Call this function after DOM loads
 document.addEventListener('DOMContentLoaded', initPatientPhotoUpload);
-
 
 
 
@@ -1044,7 +1036,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
 document.addEventListener('DOMContentLoaded', function() {
   const editProfileBtn = document.getElementById('editProfileBtn');
   const profileContainer = document.querySelector('.profile-container');
@@ -1118,7 +1109,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 3000);
   }
 });
-
 
 
 
@@ -1227,210 +1217,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 });
-// Role selection functionality
-$(document).ready(function() {
-  $('.role-btn').click(function() {
-    $('.role-btn').removeClass('active');
-    $(this).addClass('active');
-    $(this).find('input[type="radio"]').prop('checked', true);
-  });
-  
-  // Form submission
-  $('form').submit(function(e) {
-    e.preventDefault();
-    const role = $('input[name="role"]:checked').val();
-    const email = $('#email').val();
-    const password = $('#password').val();
-    
-    if (!role) {
-      alert('Please select your role');
-      return;
-    }
-    
-    if (!email || !password) {
-      alert('Please fill in all fields');
-      return;
-    }
-    
-    // Here you would typically send the data to your backend
-    console.log('Login attempt:', { role, email, password });
-    alert('Login successful for ' + role + ' role!');
-    // window.location.href = 'dashboard.html';
-  });
-});
 
-// register
-$(document).ready(function() {
-  // Create dynamic bubbles
-  function createBubbles() {
-      const colors = ['rgba(247, 85, 109, 0.08)', 'rgba(109, 95, 247, 0.08)', 'rgba(95, 247, 178, 0.08)'];
-      for (let i = 0; i < 8; i++) {
-          const bubble = document.createElement('div');
-          bubble.className = 'bubble';
-          const size = Math.random() * 100 + 50;
-          const posX = Math.random() * 100;
-          const posY = Math.random() * 100;
-          const delay = Math.random() * 10;
-          const duration = Math.random() * 10 + 10;
-          const color = colors[Math.floor(Math.random() * colors.length)];
-          
-          bubble.style.width = `${size}px`;
-          bubble.style.height = `${size}px`;
-          bubble.style.left = `${posX}%`;
-          bubble.style.top = `${posY}%`;
-          bubble.style.animationDelay = `${delay}s`;
-          bubble.style.animationDuration = `${duration}s`;
-          bubble.style.background = color;
-          
-          document.body.appendChild(bubble);
-      }
-  }
 
-  // Dynamic ECG Path Generator
-  function generateECGPath() {
-      let path = "M0,25 ";
-      const segments = 20;
-      const segmentWidth = 500 / segments;
-      
-      for(let i = 0; i < segments; i++) {
-          const x = i * segmentWidth;
-          const nextX = (i + 1) * segmentWidth;
-          const midX = x + segmentWidth/2;
-          
-          if(i % 4 === 0) {
-              // Normal heartbeat
-              path += `L${midX-10},25 `;
-              path += `L${midX-5},10 `;
-              path += `L${midX},25 `;
-              path += `L${midX+5},40 `;
-              path += `L${midX+10},25 `;
-          } else {
-              // Flat line
-              path += `L${nextX},25 `;
-          }
-      }
-      
-      return path;
-  }
 
-  // Initialize on page load
-  createBubbles();
-  
-  // Initialize ECG path
-  const ecgPath = document.querySelector('.ecg-path');
-  const points = generateECGPath();
-  ecgPath.setAttribute('d', points);
-  
-  // Animate ECG line drawing
-  setInterval(() => {
-      const newPoints = generateECGPath();
-      ecgPath.setAttribute('d', newPoints);
-  }, 6000);
-  
-  // Role Selection
-  $('.role-option').click(function() {
-      $('.role-option').removeClass('active');
-      $(this).addClass('active');
-      
-      $('.registration-form').removeClass('active');
-      const role = $(this).data('role');
-      $(`.${role}-form`).addClass('active');
-  });
 
-  // Photo Upload Preview
-  $('#photo-input').change(function(e) {
-      const file = e.target.files[0];
-      if (file) {
-          const reader = new FileReader();
-          reader.onload = function(event) {
-              $('#patient-photo').attr('src', event.target.result);
-              $('#patient-photo').css('transform', 'scale(1.05)');
-              setTimeout(() => {
-                  $('#patient-photo').css('transform', 'scale(1)');
-              }, 300);
-          };
-          reader.readAsDataURL(file);
-      }
-  });
-
-  // Form Validation
-  $('#patient-registration').submit(function(e) {
-      e.preventDefault();
-      
-      // Clear previous error styles
-      $(this).find('input, select').css({
-          'border-color': '#e2e8f0',
-          'box-shadow': 'none'
-      });
-      
-      // Check required fields
-      let isValid = true;
-      $(this).find('[required]').each(function() {
-          if (!$(this).val()) {
-              $(this).css({
-                  'border-color': 'var(--primary)',
-                  'box-shadow': '0 0 0 3px rgba(247, 85, 109, 0.2)'
-              });
-              isValid = false;
-          }
-      });
-      
-      if (!isValid) {
-          alert('Please fill out all required fields');
-          return;
-      }
-      
-      // Email validation
-      const email = $(this).find('input[type="email"]').val();
-      if (!email.includes('@') || !email.includes('.')) {
-          alert('Please enter a valid email address');
-          $(this).find('input[type="email"]').css({
-              'border-color': 'var(--primary)',
-              'box-shadow': '0 0 0 3px rgba(247, 85, 109, 0.2)'
-          });
-          return;
-      }
-      
-      // Phone validation
-      const phoneInputs = $(this).find('input[type="tel"]');
-      phoneInputs.each(function() {
-          if ($(this).val() && !/^\+?\d+$/.test($(this).val())) {
-              alert('Phone number should contain only digits and optional + prefix');
-              $(this).css({
-                  'border-color': 'var(--primary)',
-                  'box-shadow': '0 0 0 3px rgba(247, 85, 109, 0.2)'
-              }).focus();
-              isValid = false;
-              return false;
-          }
-      });
-      
-      if (!isValid) return;
-      
-      // If validation passes
-      const submitBtn = $(this).find('.submit-btn');
-      submitBtn.html('<i class="fas fa-spinner fa-spin"></i> Registering...');
-      
-      setTimeout(() => {
-          submitBtn.html('<i class="fas fa-check"></i> Registration Successful!');
-          setTimeout(() => {
-              submitBtn.html('<i class="fas fa-user-plus"></i> Register');
-              // Here you would typically submit the form or redirect
-              alert('Registration submitted successfully!');
-          }, 2000);
-      }, 1500);
-  });
-
-  // Input focus effects
-  $('input, select, textarea').focus(function() {
-      $(this).css({
-          'border-color': 'var(--primary)',
-          'box-shadow': '0 0 0 3px rgba(247, 85, 109, 0.2)'
-      });
-  }).blur(function() {
-      $(this).css({
-          'border-color': '#e2e8f0',
-          'box-shadow': 'none'
-      });
-  });
-});
