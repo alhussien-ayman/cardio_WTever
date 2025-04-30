@@ -8667,3 +8667,119 @@ body {
 	font-size: 1.1rem;
 	opacity: 0.9;
 }
+
+
+/*========================*/
+/* Additional styles for login functionality */
+
+/* Error alert styling */
+.error-alert {
+    display: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+/* Role selection button styling improvements */
+.role-selector {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.role-btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.role-btn:hover {
+    background-color: #e9ecef;
+}
+
+.role-btn input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.role-btn input[type="radio"]:checked + span + label,
+.role-btn input[type="radio"]:checked ~ span {
+    color: #009ce7;
+}
+
+.role-btn input[type="radio"]:checked + .role-icon,
+.role-btn input[type="radio"]:checked + span + .role-icon {
+    transform: scale(1.2);
+}
+
+.role-btn input[type="radio"]:checked + span,
+.role-btn input[type="radio"]:checked ~ span {
+    color: #009ce7;
+}
+
+.role-btn input[type="radio"]:checked {
+    background-color: #e3f2fd;
+    border-color: #009ce7;
+}
+
+.role-icon {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease;
+}
+
+/* Login button visual enhancements */
+.btn-login {
+    background-color: #009ce7;
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #0082c0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Bubble animation adjustments */
+.bubble {
+    position: fixed;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #e3f2fd, #bbdefb);
+    opacity: 0.7;
+    z-index: -1;
+    animation: float 15s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(5%, 5%);
+    }
+    50% {
+        transform: translate(0, 10%);
+    }
+    75% {
+        transform: translate(-5%, 5%);
+    }
+}
+
+/* Form focus states */
+.form-control:focus {
+    border-color: #009ce7;
+    box-shadow: 0 0 0 0.2rem rgba(0, 156, 231, 0.25);
+}
