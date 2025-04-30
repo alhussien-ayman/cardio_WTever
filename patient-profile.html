@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Profile | Neil S.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg header-nav">
+            <div class="navbar-header">
+                <a id="mobile_btn" href="javascript:void(0);">
+                    <span class="bar-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </a>
+                <a href="index-2.html" class="navbar-brand logo">
+                    <img src="assets/img/logotest.png" class="img-fluid" alt="Logo" />
+                </a>
+            </div>
+            <div class="main-menu-wrapper">
+                <div class="menu-header">
+                    <a href="index-2.html" class="menu-logo">
+                        <img src="assets/img/logo.png" class="img-fluid" alt="Logo" />
+                    </a>
+                    <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </div>
+                <ul class="main-nav">
+                    <li class="active">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#Specialities"> Specialities </a>
+                        <ul class="submenu">
+
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="#Doctors">Doctors </a>
+                        <ul class="submenu">
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#Features">Features</a>
+                    </li>
+                    <li class="login-link">
+                        <a href="login.html">Login / Signup</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="nav header-navbar-rht">
+                <li class="nav-item contact-item">
+                    <div class="header-contact-img">
+                        <i class="far fa-hospital"></i>
+                    </div>
+                    <div class="header-contact-detail">
+                        <p class="contact-header">Contact</p>
+                        <p class="contact-info-header">01500825432</p>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link header-login custom-button" href="login.html">login / Signup
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- /Header -->
+    <!-- Floating bubbles background -->
+    <div class="bubble" style="width: 300px; height: 300px; top: -150px; left: -150px;"></div>
+    <div class="bubble" style="width: 200px; height: 200px; bottom: -100px; right: -100px; animation-delay: 3s;"></div>
+    <div class="bubble" style="width: 150px; height: 150px; top: 30%; left: 10%; animation-delay: 5s;"></div>
+    <div class="bubble" style="width: 250px; height: 250px; bottom: 20%; right: 15%; animation-delay: 7s;"></div>
+
+    <div class="profile-container">
+        <!-- Cardiology Header -->
+        <div class="cardio-header">
+            <!-- Animated ECG Background -->
+            <div class="ecg-animation-bg"></div>
+
+            <div class="profile-section">
+                <!-- Pulsating Profile Circle -->
+                <div class="cardio-profile">
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring delay-1"></div>
+                    <div class="pulse-ring delay-2"></div>
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+
+
+                <!-- Add this near the top of your profile container -->
+                <div class="profile-actions">
+                    <button id="globalEditBtn" class="edit-btn">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                    <div class="save-cancel-btns" style="display:none;">
+                        <button id="globalSaveBtn" class="save-btn">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                        <button id="globalCancelBtn" class="cancel-btn">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Patient Info -->
+                <div class="patient-info">
+                    <h1 class="heartbeat-text">Neil S.</h1>
+                    <p class="ecg-text">Patient ID: P130412</p>
+                    <div class="patient-status">
+                        <span class="status-indicator active"></span>
+                    </div>
+                </div>
+
+                <!-- Add this edit button -->
+                <button class="edit-profile-btn" id="editProfileBtn">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </button>
+            </div>
+
+            <!-- Live ECG Line -->
+            <div class="live-ecg">
+                <svg viewBox="0 0 500 50" preserveAspectRatio="none">
+                    <path class="ecg-path" d="M0,25 L500,25" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="profile-body">
+            <!-- Left Column -->
+            <div class="left-column">
+                <div class="info-section section-1">
+                    <h2 class="section-title"><i class="fas fa-user-circle"></i> Personal Details</h2>
+                    <div class="info-grid">
+                        <div class="info-label">Fisrt name</div>
+                        <div class="info-value" data-field="firstName">Lucas</div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-label">Last name</div>
+                        <div class="info-value">Jacob</div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-label">Gender</div>
+                        <div class="info-value">Male</div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-label">Date of Birth</div>
+                        <div class="info-value">05-Apr-1988</div>
+                    </div>
+
+                </div>
+
+                <div class="info-section medical-info-section">
+                    <h2 class="section-title"><i class="fas fa-heartbeat"></i> Medical Information</h2>
+                    <div class="info-grid">
+
+                        <div class="info-grid">
+                            <div class="info-label">Blood Group</div>
+                            <div class="info-value">O+</div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-label">Referred By</div>
+                        <div class="info-value" data-field="referredBy">Practo.com</div>
+                    </div>
+
+                </div>
+
+                <div class="info-section family-section">
+                    <h2 class="section-title"><i class="fas fa-users"></i> Family Information</h2>
+                    <div class="info-grid">
+                        <div class="info-label">Parent Name</div>
+                        <div class="info-value" data-field="parentName">Girish V.</div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-label">Spouse Name</div>
+                        <div class="info-value" data-field="spouseName">Anita G.</div>
+                    </div>
+
+                </div>
+
+                <div class="info-section section-3">
+                    <h2 class="section-title"><i class="fas fa-notes-medical"></i> Patient Notes</h2>
+                    <div class="notes-section">
+                        <div class="note-item">
+                            <div>routine check up on Wednesday</div>
+                            <div class="note-date"><i class="far fa-calendar-alt"></i> Dr. Rashmi G on 22 April 2013
+                            </div>
+                        </div>
+                        <div class="note-item">
+                            <div>Needs wheelchair access.</div>
+                            <div class="note-date"><i class="far fa-calendar-alt"></i> Dr. Anuraag D on 19 April 2013
+                            </div>
+                        </div>
+                    </div>
+                    <div class="new-note">
+                        <textarea placeholder="Type note here..."></textarea>
+                        <button class="add-note-btn">Add Note <i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <div class="info-section section-2">
+                    <h2 class="section-title"><i class="fas fa-address-book"></i> Contact Details</h2>
+                    <div class="info-grid">
+                        <div class="info-label">Primary Mobile</div>
+                        <div class="info-value">+918987654321</div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-label">Secondary Mobile</div>
+                        <div class="info-value">+917895432101</div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-label">Land Line</div>
+                        <div class="info-value">+918025432101</div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-label">Email </div>
+                        <div class="info-value">nelis@somemall.com</div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-label">Street Address</div>
+                        <div class="info-value">#10 4th Main 20th Cross</div>
+                    </div>
+                </div>
+
+
+
+                <div class="info-section emergency-contact-section">
+                    <h2 class="section-title"><i class="fas fa-ambulance"></i> Emergency Contact</h2>
+                    <div class="info-grid">
+                        <div class="info-label">Emergency Contact Name</div>
+                        <div class="info-value" data-field="emergencyName">Anita Smith</div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-label">Emergency Contact Phone</div>
+                        <div class="info-value" data-field="emergencyPhone">+918987654321</div>
+                    </div>
+
+                </div>
+
+                <div class="info-section section-4">
+                    <h2 class="section-title"><i class="fas fa-history"></i> Medical History</h2>
+
+                    <div class="medical-history-grid">
+                        <div class="medical-history-category">
+                            <h3 class="medical-history-title">Known Allergies</h3>
+                            <div class="medical-history-value" data-field="allergies">Penicillin, Pollen</div>
+                        </div>
+
+                        <div class="medical-history-category">
+                            <h3 class="medical-history-title">Chronic Conditions</h3>
+                            <div class="medical-history-value" data-field="chronic">Hypertension</div>
+                        </div>
+
+                        <div class="medical-history-category">
+                            <h3 class="medical-history-title">Previous Surgeries</h3>
+                            <div class="medical-history-value" data-field="surgeries">Appendectomy (2015)</div>
+                        </div>
+
+                        <div class="medical-history-category">
+                            <h3 class="medical-history-title">Current Medications</h3>
+                            <div class="medical-history-value" data-field="medications">Lisinopril 10mg daily</div>
+                        </div>
+                    </div>
+
+                    <div class="medical-history-actions">
+                        <button class="edit-medical-btn">Edit Medical History</button>
+                        <button class="save-medical-btn" style="display:none;">Save Changes</button>
+                    </div>
+                </div>
+
+                <div class="info-section section-4">
+                    <h2 class="section-title"><i class="fas fa-shield-alt"></i> Health Insurance</h2>
+                    <div class="info-grid">
+                        <div class="info-label">Insurance Provider</div>
+                        <div class="info-value" data-field="provider">United Health</div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-label">Policy Number</div>
+                        <div class="info-value" data-field="policyNumber">UH-78945612</div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-label">Policy Valid Until</div>
+                        <div class="info-value" data-field="validUntil">12/31/2025</div>
+                    </div>
+                    <div class="insurance-actions">
+                        <button class="edit-insurance-btn">Edit</button>
+                        <button class="save-insurance-btn" style="display:none;">Save</button>
+                    </div>
+                </div>
+                <!-- Floating action button -->
+                <div class="fab" title="Quick Actions">
+                    <i class="fas fa-bolt"></i>
+                </div>
+
+                <script src="js/index.js"></script>
+                <!-- Add this right before </body> -->
+
+                <script src="js/edit.js"></script>
+            </div>
+        </div>
+
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Footer Top -->
+        <div class="footer-top">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <!-- Footer Widget -->
+                        <div class="footer-widget footer-about">
+                            <div class="footer-logo">
+                                <img src="assets/img/footerlogo.png" alt="logo" />
+                            </div>
+                            <div class="footer-about-content">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                                    aliqua.
+                                </p>
+                                <div class="social-icon">
+                                    <ul>
+                                        <li>
+                                            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" target="_blank"><i class="fab fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" target="_blank"><i class="fab fa-dribbble"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Footer Widget -->
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <!-- Footer Widget -->
+                        <div class="footer-widget footer-menu">
+                            <h2 class="footer-title">For Patients</h2>
+                            <ul>
+                                <li>
+                                    <a href="search.html"><i class="fas fa-angle-double-right"></i> Search for
+                                        Doctors</a>
+                                </li>
+                                <li>
+                                    <a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a>
+                                </li>
+                                <li>
+                                    <a href="register.html"><i class="fas fa-angle-double-right"></i> Register</a>
+                                </li>
+                                <li>
+                                    <a href="booking.html"><i class="fas fa-angle-double-right"></i> Booking</a>
+                                </li>
+                                <li>
+                                    <a href="patient-dashboard.html"><i class="fas fa-angle-double-right"></i> Patient
+                                        Dashboard</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /Footer Widget -->
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <!-- Footer Widget -->
+                        <div class="footer-widget footer-menu">
+                            <h2 class="footer-title">For Doctors</h2>
+                            <ul>
+                                <li>
+                                    <a href="appointments.html"><i class="fas fa-angle-double-right"></i>
+                                        Appointments</a>
+                                </li>
+                                <li>
+                                    <a href="chat.html"><i class="fas fa-angle-double-right"></i> Chat</a>
+                                </li>
+                                <li>
+                                    <a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a>
+                                </li>
+                                <li>
+                                    <a href="doctor-register.html"><i class="fas fa-angle-double-right"></i>
+                                        Register</a>
+                                </li>
+                                <li>
+                                    <a href="doctor-dashboard.html"><i class="fas fa-angle-double-right"></i> Doctor
+                                        Dashboard</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /Footer Widget -->
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <!-- Footer Widget -->
+                        <div class="footer-widget footer-contact">
+                            <h2 class="footer-title">Contact Us</h2>
+                            <div class="footer-contact-info">
+                                <div class="footer-address">
+                                    <span><i class="fas fa-map-marker-alt"></i></span>
+                                    <p>
+                                        3556 Beech Street, San Francisco,<br />
+                                        California, CA 94108
+                                    </p>
+                                </div>
+                                <p>
+                                    <i class="fas fa-phone-alt"></i>
+                                    01146502664
+                                </p>
+                                <p class="mb-0">
+                                    <i class="fas fa-envelope"></i>
+                                    The7th@gmail.com
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /Footer Widget -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Footer Top -->
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="container-fluid">
+                <!-- Copyright -->
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            <div class="copyright-text">
+                                <p class="mb-0">
+                                    <a href="https://www.youtube.com/channel/UCOf3bbODZA6ec8B9465gD2Q">Alhussien Ayman
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <!-- Copyright Menu -->
+                            <div class="copyright-menu">
+                                <ul class="policy-menu">
+                                    <li>
+                                        <a href="term-condition.html">Terms and Conditions</a>
+                                    </li>
+                                    <li><a href="privacy-policy.html">Policy</a></li>
+                                </ul>
+                            </div>
+                            <!-- /Copyright Menu -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /Copyright -->
+            </div>
+        </div>
+        <!-- /Footer Bottom -->
+    </footer>
+    <!-- /Footer -->
+    </div>
+    <!-- /Main Wrapper -->
+    <!-- jQuery -->
+    <script src="assets/js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- Slick JS -->
+    <script src="assets/js/slick.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+</body>
+</body>
+
+</html>
