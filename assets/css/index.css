@@ -1,8 +1,8 @@
 /* Hero Section with responsive background image */
 .hero {
-    background: 
-   linear-gradient(135deg, rgba(17, 125, 200, 0.6), rgba(244, 74, 106, 0.6)),
-        url('https://img.freepik.com/free-photo/healthy-lifestyle-running-outdoors_23-2151847290.jpg?t=st=1746087487~exp=1746091087~hmac=d20e355e9753b423d6d70bb25969c3b75b9579da2828b0b55d9a5d032b6100b3&w=1480') center/cover no-repeat;
+	background:
+   linear-gradient(135deg, rgba(17, 125, 200, 0.5), rgba(244, 74, 106, 0.5)),
+    url('https://img.freepik.com/free-photo/healthy-lifestyle-running-outdoors_23-2151847290.jpg?t=st=1746135264~exp=1746138864~hmac=21401283451c943a0a612e1724c85237f2f43193db1efe25d3ea0f61f19afc23&w=1480')center/cover no-repeat;
     color: white;
     padding: 80px 0;
     text-align: center;
