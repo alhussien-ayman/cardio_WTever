@@ -1,4 +1,3 @@
-// Login connection script for Cardiology System
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
     const emailInput = document.getElementById('email');

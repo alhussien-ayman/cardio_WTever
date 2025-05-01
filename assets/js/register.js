@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Make API call to register the patient
-            const response = await fetch('http://cardiology-department-system.runasp.net/api/Patient/register', {
+            const response = await fetch('https://cardiology-department-system.runasp.net/api/Patient/register', {
                 method: 'POST', // Make sure this matches what the server expects
                 headers: {
                     'Content-Type': 'application/json'
