@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 fName: formData.get('firstName'),
                 lName: formData.get('lastName'),
                 birthDate: new Date(formData.get('dob')).toISOString(),
-                password: generatePassword(), // This would normally come from a password field
+                password: formData.get('password'), // This would normally come from a password field
                 email: formData.get('email'),
                 photoPath: null, // Will be updated after file upload if needed
                 bloodType: formData.get('bloodGroup'),
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 insuranceProvider: formData.get('insuranceProvider') || null,
                 policyValidDate: formData.get('policyValidUntil') ? new Date(formData.get('policyValidUntil')).toISOString() : null
             };
-            
+    
             // Validate the payload based on API requirements
             const validationErrors = validatePatientData(payload);
             

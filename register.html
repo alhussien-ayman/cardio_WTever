@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/register.css">
 </head>
 <body>
 
@@ -78,8 +79,36 @@
         </nav>
     </header>
     <!-- /Header -->
+    <div class="bubble" style="width: 300px; height: 300px; top: -150px; left: -150px;"></div>
+    <div class="bubble" style="width: 200px; height: 200px; bottom: -100px; right: -100px; animation-delay: 3s;"></div>
+    <div class="bubble" style="width: 150px; height: 150px; top: 30%; left: 10%; animation-delay: 5s;"></div>
+    <div class="bubble" style="width: 250px; height: 250px; bottom: 20%; right: 15%; animation-delay: 7s;"></div>
 <!-- Updated registration form with password fields and other improvements -->
-<div class="registration-form patient-form active">
+<div class="registration-container">
+      <!-- Cardiology Header -->
+      <div class="cardio-header">
+        <div class="ecg-animation-bg"></div>
+        
+        <div class="header-content">
+            <div class="cardio-profile">
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring delay-1"></div>
+                <div class="pulse-ring delay-2"></div>
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            
+            <div class="header-text">
+                <h1 class="heartbeat-text">Cardiology HIS</h1>
+                <p class="ecg-text">Complete your registration to access our healthcare services</p>
+            </div>
+        </div>
+        
+        <div class="live-ecg">
+            <svg viewBox="0 0 500 50" preserveAspectRatio="none">
+                <path class="ecg-path" d="M0,25 L500,25" />
+            </svg>
+        </div>
+    </div>
     <!-- Form success/error messages -->
     <div class="form-success-message">
         <i class="fas fa-check-circle"></i> Registration successful! You can now log in to your account.
@@ -88,22 +117,17 @@
         <i class="fas fa-exclamation-circle"></i> <span class="error-message-text">An error occurred.</span>
     </div>
     
-    <!-- Form progress indicator -->
-    <div class="form-progress">
-        <div class="progress-step active">
-            <div class="step-indicator">1</div>
-            <div class="step-name">Personal Info</div>
-        </div>
-        <div class="progress-step">
-            <div class="step-indicator">2</div>
-            <div class="step-name">Medical Info</div>
-        </div>
-        <div class="progress-step">
-            <div class="step-indicator">3</div>
-            <div class="step-name">Contact Info</div>
-        </div>
-    </div>
-    
+  
+    <div class="role-toolbar">
+      <div class="role-option active" data-role="patient">
+          <div class="role-icon"><i class="fas fa-user"></i></div>
+          <span>Patient</span>
+      </div>
+      <div class="role-option" data-role="doctor">
+          <div class="role-icon"><i class="fas fa-user-md"></i></div>
+          <span>Doctor</span>
+      </div>
+  </div>
     <form id="patient-registration">
         <div class="form-section">
             <h2 class="section-title"><i class="fas fa-user-circle"></i> Personal Information</h2>
