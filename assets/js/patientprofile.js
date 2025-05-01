@@ -923,7 +923,7 @@ document.addEventListener('DOMContentLoaded', function() {
             profilePhoto.src = `${photoBaseUrl}${data.photoPath}`;
             profilePhoto.onerror = function() {
                 // Fallback to placeholder if image fails to load
-                this.src = 'https://via.placeholder.com/100';
+                this.src = './assets/img/user-placeholder.png';
             };
         }
 
