@@ -496,10 +496,6 @@ function createBubbles() {
   });
   
   
-  
-  
-  
-  
   // Patient Photo Upload Functionality
   function initPatientPhotoUpload() {
     const photoUpload = document.createElement('input');
@@ -547,22 +543,14 @@ function createBubbles() {
   
     uploadBtn.addEventListener('click', () => photoUpload.click());
   }
-  
+
   // Call this function after DOM loads
   document.addEventListener('DOMContentLoaded', initPatientPhotoUpload);
-  
-  
-  
-  
-  
-  
-  
-  
   document.addEventListener('DOMContentLoaded', function() {
     const editProfileBtn = document.getElementById('editProfileBtn');
     const profileContainer = document.querySelector('.profile-container');
     let isEditMode = false;
-  
+
     editProfileBtn.addEventListener('click', function() {
         isEditMode = !isEditMode;
         
@@ -636,12 +624,7 @@ function createBubbles() {
         }, 3000);
     }
   });
-  
-  
-  
-  
-  
-  
+
   document.addEventListener('DOMContentLoaded', function() {
     const editProfileBtn = document.getElementById('editProfileBtn');
     const profileContainer = document.querySelector('.profile-container');
@@ -715,12 +698,7 @@ function createBubbles() {
         }, 3000);
     }
   });
-  
-  
-  
-  
-  
-  
+
   document.addEventListener('DOMContentLoaded', function() {
     // Get all elements
     const editBtn = document.getElementById('editProfileBtn');
@@ -814,7 +792,7 @@ function createBubbles() {
             }
         });
     }
-    
+     
     // FAB Button
     const fab = document.querySelector('.fab');
     if (fab) {
@@ -824,4 +802,616 @@ function createBubbles() {
     }
   });
  //==================================================================================================================
- 
+  // File: assets/js/patientProfile.js
+
+/**
+ * This file handles the fetching of patient data and displaying it on the profile page
+ */
+
+// Global variable to store patient data
+// let patientData = null;
+
+// // Check if we're on the login page
+// if (window.location.pathname.includes('login.html')) {
+//     // Add submit event listener to the login form
+//     document.addEventListener('DOMContentLoaded', function() {
+//         const loginForm = document.getElementById('loginForm');
+//         if (loginForm) {
+//             loginForm.addEventListener('submit', handleLoginSubmit);
+//         }
+//     });
+// }
+
+// // Check if we're on the patient profile page
+// if (window.location.pathname.includes('patientprofile.html') || window.location.pathname.endsWith('patientprofile.html')) {
+//     // Load patient data when the page loads
+//     document.addEventListener('DOMContentLoaded', loadPatientProfile);
+// }
+
+// /**
+//  * Handles the login form submission
+//  * @param {Event} event - The submit event
+//  */
+// function handleLoginSubmit(event) {
+//     event.preventDefault();
+    
+//     const email = document.getElementById('email').value;
+//     const password = document.getElementById('password').value;
+//     const role = document.querySelector('input[name="role"]:checked')?.value;
+    
+//     // Ensure we're logging in as a patient
+//     if (role !== 'patient') {
+//         // If not a patient login, proceed with standard login flow
+//         return;
+//     }
+    
+//     // Make API request to login endpoint
+//     fetchPatientData(email, password)
+//         .then(data => {
+//             if (data) {
+//                 // Save patient data to localStorage
+//                 localStorage.setItem('patientData', JSON.stringify(data));
+                
+//                 // Redirect to patient profile page
+//                 window.location.href = 'patient-profile.html';
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Login failed:', error);
+//             // Display error message to user
+//             showLoginError('Login failed. Please check your credentials and try again.');
+//         });
+// }
+
+// /**
+//  * Makes API request to fetch patient data
+//  * @param {string} email - User's email
+//  * @param {string} password - User's password
+//  * @returns {Promise} - Promise resolving to patient data
+//  */
+// function fetchPatientData(email, password) {
+//     // API endpoint URL - replace with your actual API endpoint
+//     const apiUrl = 'http://cardiology-department-system.runasp.net/index.html/api/Patient/Login';
+    
+//     // Create request payload
+//     const payload = {
+//         email: email,
+//         password: password
+//     };
+    
+//     // Make the API request
+//     return fetch(apiUrl, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(payload)
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Login failed');
+//         }
+//         return response.json();
+//     });
+// }
+
+// /**
+//  * Shows login error message
+//  * @param {string} message - Error message to display
+//  */
+// function showLoginError(message) {
+//     // Create error alert if it doesn't exist
+//     let errorAlert = document.querySelector('.alert-danger');
+//     if (!errorAlert) {
+//         errorAlert = document.createElement('div');
+//         errorAlert.className = 'alert alert-danger';
+//         errorAlert.role = 'alert';
+        
+//         // Insert at the top of the form
+//         const loginForm = document.getElementById('loginForm');
+//         loginForm.insertBefore(errorAlert, loginForm.firstChild);
+//     }
+    
+//     errorAlert.textContent = message;
+// }
+
+// /**
+//  * Loads patient profile data from localStorage and displays it
+//  */
+// function loadPatientProfile() {
+//     // Retrieve patient data from localStorage
+//     const storedData = localStorage.getItem('patientData');
+    
+//     if (!storedData) {
+//         // If no data found, redirect to login page
+//         console.error('No patient data found');
+//         window.location.href = 'login.html';
+//         return;
+//     }
+    
+//     try {
+//         // Parse the stored data
+//         patientData = JSON.parse(storedData);
+        
+//         // Update the UI with patient data
+//         displayPatientData(patientData);
+//     } catch (error) {
+//         console.error('Error parsing patient data:', error);
+//         // Handle error appropriately
+//     }
+// }
+
+// /**
+//  * Displays patient data in the profile page
+//  * @param {Object} data - Patient data object
+//  */
+// function displayPatientData(data) {
+//     // Update display fields with patient data
+    
+//     // Display name (top of profile)
+//     const fullName = `${data.fName || ''} ${data.lName || ''}`.trim();
+//     updateElementText('display-name', fullName || 'Patient Name');
+    
+//     // Personal details section
+//     updateElementText('display-firstName', data.fName || '');
+//     updateElementText('display-lastName', data.lName || '');
+//     updateElementText('display-gender', data.gender || '');
+//     updateElementText('display-dob', formatDate(data.birthDate) || '');
+    
+//     // Medical information
+//     updateElementText('display-bloodGroup', data.bloodType || '');
+//     updateElementText('display-referredBy', data.link || '');
+    
+//     // Family information
+//     updateElementText('display-parentName', data.parentName || '');
+//     updateElementText('display-spouseName', data.spouseName || '');
+    
+//     // Contact details
+//     if (data.phoneNumbers && data.phoneNumbers.length > 0) {
+//         updateElementText('display-primaryMobile', data.phoneNumbers[0] || '');
+//         if (data.phoneNumbers.length > 1) {
+//             updateElementText('display-secondaryMobile', data.phoneNumbers[1] || '');
+//         }
+//     }
+//     updateElementText('display-landLine', data.landLine || '');
+//     updateElementText('display-email', data.email || '');
+//     updateElementText('display-streetAddress', data.address || '');
+    
+//     // Emergency contact
+//     updateElementText('display-emergencyName', data.emergencyContactName || '');
+//     updateElementText('display-emergencyPhone', data.emergencyContactPhone || '');
+    
+//     // Medical history
+//     updateElementText('display-allergies', data.allergies || '');
+//     updateElementText('display-chronic', data.chronicConditions || '');
+//     updateElementText('display-surgeries', data.previousSurgeries || '');
+//     updateElementText('display-medications', data.currentMedications || '');
+    
+//     // Health insurance
+//     updateElementText('display-provider', data.insuranceProvider || '');
+//     updateElementText('display-policyNumber', data.policyNumber || '');
+//     updateElementText('display-validUntil', formatDate(data.policyValidDate) || '');
+    
+//     // Also update edit mode fields with the same data
+//     populateEditFields(data);
+// }
+
+// /**
+//  * Updates text content of an element if it exists
+//  * @param {string} elementId - ID of the element to update
+//  * @param {string} text - Text to set
+//  */
+// function updateElementText(elementId, text) {
+//     const element = document.getElementById(elementId);
+//     if (element) {
+//         element.textContent = text;
+//     }
+// }
+
+// /**
+//  * Populates edit mode fields with patient data
+//  * @param {Object} data - Patient data object
+//  */
+// function populateEditFields(data) {
+//     // Personal details
+//     setInputValue('edit-firstName', data.fName);
+//     setInputValue('edit-lastName', data.lName);
+//     setSelectValue('edit-gender', data.gender);
+//     setInputValue('edit-dob', formatDate(data.birthDate));
+    
+//     // Medical information
+//     setSelectValue('edit-bloodGroup', data.bloodType);
+//     setInputValue('edit-referredBy', data.link);
+    
+//     // Family information
+//     setInputValue('edit-parentName', data.parentName);
+//     setInputValue('edit-spouseName', data.spouseName);
+    
+//     // Contact details
+//     if (data.phoneNumbers && data.phoneNumbers.length > 0) {
+//         setInputValue('edit-primaryMobile', data.phoneNumbers[0]);
+//         if (data.phoneNumbers.length > 1) {
+//             setInputValue('edit-secondaryMobile', data.phoneNumbers[1]);
+//         }
+//     }
+//     setInputValue('edit-landLine', data.landLine);
+//     setInputValue('edit-email', data.email);
+//     setInputValue('edit-streetAddress', data.address);
+    
+//     // Emergency contact
+//     setInputValue('edit-emergencyName', data.emergencyContactName);
+//     setInputValue('edit-emergencyPhone', data.emergencyContactPhone);
+    
+//     // Medical history
+//     setTextareaValue('edit-allergies', data.allergies);
+//     setTextareaValue('edit-chronic', data.chronicConditions);
+//     setTextareaValue('edit-surgeries', data.previousSurgeries);
+//     setTextareaValue('edit-medications', data.currentMedications);
+    
+//     // Health insurance
+//     setInputValue('edit-provider', data.insuranceProvider);
+//     setInputValue('edit-policyNumber', data.policyNumber);
+//     setInputValue('edit-validUntil', formatDate(data.policyValidDate));
+// }
+
+// /**
+//  * Sets value of an input element if it exists
+//  * @param {string} elementId - ID of the input element
+//  * @param {string} value - Value to set
+//  */
+// function setInputValue(elementId, value) {
+//     const element = document.getElementById(elementId);
+//     if (element) {
+//         element.value = value || '';
+//     }
+// }
+
+// /**
+//  * Sets value of a select element if it exists
+//  * @param {string} elementId - ID of the select element
+//  * @param {string} value - Value to set
+//  */
+// function setSelectValue(elementId, value) {
+//     const element = document.getElementById(elementId);
+//     if (element && value) {
+//         // Find and select the matching option
+//         const option = Array.from(element.options).find(opt => opt.value === value);
+//         if (option) {
+//             element.value = value;
+//         }
+//     }
+// }
+
+// /**
+//  * Sets value of a textarea element if it exists
+//  * @param {string} elementId - ID of the textarea element
+//  * @param {string} value - Value to set
+//  */
+// function setTextareaValue(elementId, value) {
+//     const element = document.getElementById(elementId);
+//     if (element) {
+//         element.value = value || '';
+//     }
+// }
+
+// /**
+//  * Formats a date string or object into a readable format
+//  * @param {string|Date} dateInput - Date to format
+//  * @returns {string} - Formatted date string
+//  */
+// function formatDate(dateInput) {
+//     if (!dateInput) return '';
+    
+//     try {
+//         const date = new Date(dateInput);
+//         // Check if date is valid
+//         if (isNaN(date.getTime())) return dateInput;
+        
+//         // Format as DD-MMM-YYYY
+//         const options = { day: '2-digit', month: 'short', year: 'numeric' };
+//         return date.toLocaleDateString('en-US', options);
+//     } catch (error) {
+//         console.error('Error formatting date:', error);
+//         return dateInput;
+//     }
+// }
+
+// /**
+//  * Updates patient data via API when edit form is submitted
+//  */
+// document.addEventListener('DOMContentLoaded', function() {
+//     const saveBtn = document.getElementById('saveBtn');
+//     if (saveBtn) {
+//         saveBtn.addEventListener('click', savePatientData);
+//     }
+// });
+
+// /**
+//  * Collects form data and sends update request to API
+//  */
+// function savePatientData() {
+//     // Collect data from form fields
+//     const updatedData = {
+//         fName: getInputValue('edit-firstName'),
+//         lName: getInputValue('edit-lastName'),
+//         birthDate: parseDateForAPI(getInputValue('edit-dob')),
+//         email: getInputValue('edit-email'),
+//         bloodType: getSelectValue('edit-bloodGroup'),
+//         emergencyContactName: getInputValue('edit-emergencyName'),
+//         emergencyContactPhone: getInputValue('edit-emergencyPhone'),
+//         phoneNumbers: [
+//             getInputValue('edit-primaryMobile'),
+//             getInputValue('edit-secondaryMobile')
+//         ].filter(Boolean), // Remove empty values
+//         gender: getSelectValue('edit-gender'),
+//         link: getInputValue('edit-referredBy'),
+//         parentName: getInputValue('edit-parentName'),
+//         address: getInputValue('edit-streetAddress'),
+//         spouseName: getInputValue('edit-spouseName'),
+//         landLine: getInputValue('edit-landLine'),
+//         allergies: getTextareaValue('edit-allergies'),
+//         chronicConditions: getTextareaValue('edit-chronic'),
+//         previousSurgeries: getTextareaValue('edit-surgeries'),
+//         currentMedications: getTextareaValue('edit-medications'),
+//         policyNumber: getInputValue('edit-policyNumber'),
+//         insuranceProvider: getInputValue('edit-provider'),
+//         policyValidDate: parseDateForAPI(getInputValue('edit-validUntil'))
+//     };
+    
+//     // Keep the patient ID from the original data
+//     if (patientData && patientData.id) {
+//         updatedData.id = patientData.id;
+//     }
+    
+//     // Send update to API
+//     updatePatientData(updatedData)
+//         .then(response => {
+//             if (response.success) {
+//                 // Update stored data
+//                 patientData = updatedData;
+//                 localStorage.setItem('patientData', JSON.stringify(updatedData));
+                
+//                 // Switch back to view mode
+//                 document.getElementById('view-mode').style.display = 'block';
+//                 document.getElementById('edit-mode').style.display = 'none';
+                
+//                 // Update the display with new data
+//                 displayPatientData(updatedData);
+                
+//                 // Show success message
+//                 showToast('Profile updated successfully');
+//             } else {
+//                 showToast('Failed to update profile', 'error');
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error updating profile:', error);
+//             showToast('Error updating profile. Please try again.', 'error');
+//         });
+// }
+
+// /**
+//  * Gets value from an input element
+//  * @param {string} elementId - Element ID
+//  * @returns {string} - Input value
+//  */
+// function getInputValue(elementId) {
+//     const element = document.getElementById(elementId);
+//     return element ? element.value : '';
+// }
+
+// /**
+//  * Gets value from a select element
+//  * @param {string} elementId - Element ID
+//  * @returns {string} - Selected value
+//  */
+// function getSelectValue(elementId) {
+//     const element = document.getElementById(elementId);
+//     return element ? element.value : '';
+// }
+
+// /**
+//  * Gets value from a textarea element
+//  * @param {string} elementId - Element ID
+//  * @returns {string} - Textarea content
+//  */
+// function getTextareaValue(elementId) {
+//     const element = document.getElementById(elementId);
+//     return element ? element.value : '';
+// }
+
+// /**
+//  * Parses a display date for API submission
+//  * @param {string} dateStr - Date string to parse
+//  * @returns {string|null} - Date in API format or null
+//  */
+// function parseDateForAPI(dateStr) {
+//     if (!dateStr) return null;
+    
+//     try {
+//         const date = new Date(dateStr);
+//         if (isNaN(date.getTime())) return null;
+        
+//         // Format as YYYY-MM-DD for API
+//         return date.toISOString().split('T')[0];
+//     } catch (error) {
+//         console.error('Error parsing date for API:', error);
+//         return null;
+//     }
+// }
+
+// /**
+//  * Sends updated patient data to the API
+//  * @param {Object} data - Updated patient data
+//  * @returns {Promise} - Promise resolving to API response
+//  */
+// function updatePatientData(data) {
+//     // API endpoint URL - replace with your actual API endpoint
+//     const apiUrl = 'http://cardiology-department-system.runasp.net/index.html/api/Patient/Update';
+    
+//     // Make the API request
+//     return fetch(apiUrl, {
+//         method: 'PUT',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': 'Bearer ' + localStorage.getItem('token') // If using token auth
+//         },
+//         body: JSON.stringify(data)
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Update failed');
+//         }
+//         return response.json();
+//     });
+// }
+
+// /**
+//  * Shows a toast notification
+//  * @param {string} message - Message to display
+//  * @param {string} type - Type of toast (success, error)
+//  */
+// function showToast(message, type = 'success') {
+//     // Check if we already have a toast container
+//     let toastContainer = document.querySelector('.toast-container');
+    
+//     if (!toastContainer) {
+//         // Create toast container
+//         toastContainer = document.createElement('div');
+//         toastContainer.className = 'toast-container';
+//         document.body.appendChild(toastContainer);
+//     }
+    
+//     // Create toast element
+//     const toast = document.createElement('div');
+//     toast.className = `toast ${type}`;
+//     toast.textContent = message;
+    
+//     // Add to container
+//     toastContainer.appendChild(toast);
+    
+//     // Auto remove after delay
+//     setTimeout(() => {
+//         toast.classList.add('hide');
+//         setTimeout(() => {
+//             toast.remove();
+//         }, 300);
+//     }, 3000);
+// }
+  //=======================================================================================
+  // const patientId = localStorage.getItem("PatientId");
+  
+  // if (patientId) {
+    //   fetch(`http://cardiology-department-system.runasp.net/api/Patient/${patientId}`)
+    //     .then(res => res.json())
+    //     .then(data => {
+        //       document.getElementById('display-firstName').textContent = data.fName;
+        
+        //     })
+        //     .catch(err => {
+            //       console.error("Error loading profile:", err);
+            //     });
+            // } else {
+                //   alert("Patient ID not found. Please log in again.");
+                //   window.location.href = "login.html";
+                // }
+                
+//=======================================================================================
+document.addEventListener("DOMContentLoaded", () => {
+    const email = localStorage.getItem("patientEmail"); // or patientId
+    if (!email) {
+      alert("No patient email found. Please log in.");
+      return;
+    }
+    
+    console.log("Fetching data for email:", email); // Debug log
+    
+    // Function to fetch and populate data
+    fetch(`http://cardiology-department-system.runasp.net/api/Patient/Profile}`, {
+      method: "GET",
+      credentials: "include", // if using cookie auth
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        console.log("Response status:", response.status); // Debug log
+        // Check if response is ok (status 200-299)
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json(); // Parse JSON response
+      })
+      .then(data => {
+        console.log("Data received:", data); // Debug log
+        
+        // Personal Details
+        document.getElementById("display-name").textContent = data.firstName + " " + (data.lastName || "");
+        document.getElementById("display-patientId").textContent = data.patientId || "";
+        document.getElementById("display-firstName").textContent = data.firstName || "";
+        document.getElementById("display-lastName").textContent = data.lastName || "";
+        document.getElementById("display-gender").textContent = data.gender || "";
+        document.getElementById("display-dob").textContent = data.dateOfBirth || "";
+  
+        // Medical Information
+        document.getElementById("display-bloodGroup").textContent = data.bloodGroup || "";
+        document.getElementById("display-referredBy").textContent = data.referredBy || "";
+  
+        // Family Information
+        document.getElementById("display-parentName").textContent = data.parentName || "";
+        document.getElementById("display-spouseName").textContent = data.spouseName || "";
+  
+        // Contact Details
+        document.getElementById("display-primaryMobile").textContent = data.primaryMobile || "";
+        document.getElementById("display-secondaryMobile").textContent = data.secondaryMobile || "";
+        document.getElementById("display-landLine").textContent = data.landLine || "";
+        document.getElementById("display-email").textContent = data.email || "";
+        document.getElementById("display-streetAddress").textContent = data.streetAddress || "";
+  
+        // Emergency Contact
+        document.getElementById("display-emergencyName").textContent = data.emergencyContactName || "";
+        document.getElementById("display-emergencyPhone").textContent = data.emergencyContactPhone || "";
+  
+        // Medical History
+        document.getElementById("display-allergies").textContent = data.allergies || "";
+        document.getElementById("display-chronic").textContent = data.chronicConditions || "";
+        document.getElementById("display-surgeries").textContent = data.previousSurgeries || "";
+        document.getElementById("display-medications").textContent = data.currentMedications || "";
+  
+        // Health Insurance
+        document.getElementById("display-provider").textContent = data.insuranceProvider || "";
+        document.getElementById("display-policyNumber").textContent = data.policyNumber || "";
+        document.getElementById("display-validUntil").textContent = data.policyValidUntil || "";
+  
+        // Notes (Array)
+        const notesDisplay = document.getElementById("notes-display");
+        if (notesDisplay) {
+          notesDisplay.innerHTML = ""; // Clear existing
+          if (data.notes && Array.isArray(data.notes)) {
+            data.notes.forEach(note => {
+              const noteDiv = document.createElement("div");
+              noteDiv.textContent = note;
+              notesDisplay.appendChild(noteDiv);
+            });
+          }
+        } else {
+          console.warn("Notes display element not found");
+        }
+        
+        console.log("Data populated successfully");
+      })
+      .catch(error => {
+        console.error("Failed to fetch patient data:", error);
+        alert("Error loading patient data: " + error.message);
+        
+        // Optional: Add error message to the page itself
+        const errorContainer = document.createElement("div");
+        errorContainer.className = "error-message";
+        errorContainer.style.color = "red";
+        errorContainer.style.padding = "10px";
+        errorContainer.style.margin = "10px 0";
+        errorContainer.textContent = "Failed to load patient data: " + error.message;
+        document.body.prepend(errorContainer);
+      });
+  });

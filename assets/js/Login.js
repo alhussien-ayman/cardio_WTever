@@ -48,8 +48,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify(loginData),
                 credentials: 'include' // Include cookies for session management
+            }).then(res => res.json())
+            .then(data => {
+              // Save patient ID
+              localStorage.setItem("patientId", data.email);
+            
+              // Redirect to profile page
+              window.location.href = "patientprofile.html";
             });
             
+            
+        
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Login failed. Please check your credentials.');
@@ -142,3 +151,12 @@ document.addEventListener('DOMContentLoaded', function() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 });
+
+// Store authentication data in localStorage
+localStorage.setItem("patientEmail", email);
+localStorage.setItem("authToken", data.token);
+
+// Additional user data if provided by the API
+if (data.patientId) {
+  localStorage.setItem("patientId", data.patientId);
+}
