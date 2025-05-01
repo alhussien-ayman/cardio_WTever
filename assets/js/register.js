@@ -306,3 +306,4 @@ function generatePassword() {
     // This is just a placeholder - you would have password fields in your form
     return 'Temporary1!';
 }
+
