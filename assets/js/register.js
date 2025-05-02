@@ -199,34 +199,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Role switching functionality
-    const roleOptions = document.querySelectorAll('.role-option');
-    roleOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            // Remove active class from all options
-            roleOptions.forEach(opt => opt.classList.remove('active'));
-            // Add active class to clicked option
-            this.classList.add('active');
-            
-            // Toggle form display based on role
-            const role = this.dataset.role;
-            if (role === 'patient') {
-                document.querySelector('.patient-form').classList.add('active');
-                // If there's a doctor form, hide it
-                const doctorForm = document.querySelector('.doctor-form');
-                if (doctorForm) doctorForm.classList.remove('active');
-            } else if (role === 'doctor') {
-                document.querySelector('.patient-form').classList.remove('active');
-                // If there's a doctor form, show it
-                const doctorForm = document.querySelector('.doctor-form');
-                if (doctorForm) doctorForm.classList.add('active');
-                else {
-                    // Redirect to doctor registration page if separate
-                    window.location.href = 'doctor-register.html';
-                }
-            }
+    document.querySelectorAll('.role-option').forEach(option => {
+        option.addEventListener('click', () => {
+          const role = option.getAttribute('data-role');
+          if (role === 'patient') {
+            window.location.href = 'register.html'; // replace with your patient page URL
+          } else if (role === 'doctor') {
+            window.location.href = 'doctor.html'; // replace with your doctor page URL
+          }
         });
-    });
+      });
     
     // Helper function to display errors consistently
     function displayError(message) {

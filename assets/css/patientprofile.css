@@ -1852,3 +1852,13 @@ select.editable-field {
     font-size: 18px;
     border: 2px solid #fff;
 }
+
+.patient-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Ensures it layers properly with pulse rings */
+  }

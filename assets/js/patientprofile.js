@@ -823,7 +823,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         } catch (error) {
             console.error('[DATA] Profile load error:', error);
-            
+
             // Try to use cached data if available
             const cached = localStorage.getItem('profileData');
             if (cached) {
@@ -917,15 +917,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Set profile photo if available
         const profilePhoto = document.getElementById('patientPhotoImg');
-        if (profilePhoto && data.photoPath && data.photoPath !== 'string') {
-            // Assuming you have a base URL for patient photos
-            const photoBaseUrl = 'http://cardiology-department-system.runasp.net/images/patients/';
-            profilePhoto.src = `${photoBaseUrl}${data.photoPath}`;
-            profilePhoto.onerror = function() {
-                // Fallback to placeholder if image fails to load
-                this.src = './assets/img/user-placeholder.png';
-            };
-        }
+if (profilePhoto) {
+  fetch('https://cardiology-department-system.runasp.net/api/Patient/Profile')
+    .then(res => res.json())
+    .then(data => {
+      if (data.photoPath) {
+        profilePhoto.src = `https://cardiology-department-system.runasp.net/api/Patient/Profile/${data.photoPath}`;
+        profilePhoto.onerror = () => {
+          profilePhoto.src = './assets/img/user-placeholder.png'; // Fallback if image fails
+        };
+      }
+    })
+    .catch(err => {
+      console.error("Error loading patient photo:", err);
+      profilePhoto.src = './assets/img/user-placeholder.png'; // Fallback if API fails
+    });
+}
 
         console.log('[UI] Profile display updated successfully');
     }
