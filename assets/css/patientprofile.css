@@ -1263,7 +1263,6 @@ body {
     background: rgba(255,255,255,0.);
 }
 
-
 /* Edit Profile Button */
 .edit-profile-btn {
     position: absolute;
@@ -1386,8 +1385,6 @@ body {
     color: white;
     margin-left: 80px;
 }
-  
-
 
 form-actions {
     text-align: right;

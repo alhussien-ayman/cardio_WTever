@@ -1,4 +1,4 @@
-// Patient Registration Form Handler with specific 405 Method Not Allowed handling
+// Patient Registration Form Handler with multipart/form-data support
 document.addEventListener('DOMContentLoaded', function() {
     // Get form references
     const patientForm = document.getElementById('patient-registration');
@@ -34,87 +34,77 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         try {
-            // Collect form data
+            // Create FormData object for multipart/form-data
             const formData = new FormData(patientForm);
             
-            // Prepare API request payload
-            const payload = {
-                fName: formData.get('firstName'),
-                lName: formData.get('lastName'),
-                birthDate: new Date(formData.get('dob')).toISOString(),
-                password: formData.get('password'), // This would normally come from a password field
-                email: formData.get('email'),
-                photoPath: null, // Will be updated after file upload if needed
-                bloodType: formData.get('bloodGroup'),
-                emergencyContactName: formData.get('emergencyContactName'),
-                emergencyContactPhone: formData.get('emergencyContactPhone'),
-                phoneNumbers: [
-                    formData.get('primaryMobile'),
-                    formData.get('secondaryMobile') || null
-                ].filter(Boolean),
-                gender: formData.get('gender'),
-                link: formData.get('referredBy') || "Direct",
-                parentName: formData.get('parentName') || "",
-                address: formData.get('address'),
-                spouseName: formData.get('spouseName') || null,
-                landLine: formData.get('landline') || null,
-                allergies: formData.get('allergies') || null,
-                chronicConditions: formData.get('chronicConditions') || null,
-                previousSurgeries: formData.get('surgeries') || null,
-                currentMedications: formData.get('medications') || null,
-                policyNumber: formData.get('policyNumber') || null,
-                insuranceProvider: formData.get('insuranceProvider') || null,
-                policyValidDate: formData.get('policyValidUntil') ? new Date(formData.get('policyValidUntil')).toISOString() : null
-            };
-    
-            // Validate the payload based on API requirements
-            const validationErrors = validatePatientData(payload);
+            // Prepare the data according to API requirements
+            // Note: Field names must match exactly what the API expects
+            const payload = new FormData();
             
-            if (validationErrors.length > 0) {
-                // Show validation errors
-                displayError('Please correct the following errors:\n' + validationErrors.join('\n'));
-                return;
+            // Required fields
+            payload.append('FName', formData.get('firstName'));
+            payload.append('LName', formData.get('lastName'));
+            payload.append('BirthDate', new Date(formData.get('dob')).toISOString());
+            payload.append('Password', formData.get('password'));
+            payload.append('Email', formData.get('email'));
+            payload.append('Address', formData.get('address'));
+            payload.append('EmergencyContactName', formData.get('emergencyContactName'));
+            payload.append('EmergencyContactPhone', formData.get('emergencyContactPhone'));
+            payload.append('Gender', formData.get('gender'));
+            payload.append('ParentName', formData.get('parentName') || "");
+            payload.append('Link', formData.get('referredBy') || "Direct");
+            
+            // Phone numbers as array
+            const primaryPhone = formData.get('primaryMobile');
+            const secondaryPhone = formData.get('secondaryMobile');
+            payload.append('PhoneNumbers', primaryPhone);
+            if (secondaryPhone) {
+                payload.append('PhoneNumbers', secondaryPhone);
+            }
+            
+            // Optional fields
+            if (formData.get('landline')) payload.append('LandLine', formData.get('landline'));
+            if (formData.get('spouseName')) payload.append('SpouseName', formData.get('spouseName'));
+            if (formData.get('bloodGroup')) payload.append('BloodType', formData.get('bloodGroup'));
+            if (formData.get('allergies')) payload.append('Allergies', formData.get('allergies'));
+            if (formData.get('chronicConditions')) payload.append('ChronicConditions', formData.get('chronicConditions'));
+            if (formData.get('surgeries')) payload.append('PreviousSurgeries', formData.get('surgeries'));
+            if (formData.get('medications')) payload.append('CurrentMedications', formData.get('medications'));
+            if (formData.get('policyNumber')) payload.append('PolicyNumber', formData.get('policyNumber'));
+            if (formData.get('insuranceProvider')) payload.append('InsuranceProvider', formData.get('insuranceProvider'));
+            if (formData.get('policyValidUntil')) {
+                payload.append('PolicyValidDate', new Date(formData.get('policyValidUntil')).toISOString());
             }
             
             // Handle photo upload if provided
             const photoFile = photoInput.files[0];
             if (photoFile) {
-                payload.photoPath = 'uploads/' + photoFile.name;
+                payload.append('Photo', photoFile);
+                payload.append('PhotoPath', 'uploads/' + photoFile.name);
             }
             
-            // Make API call to register the patient
+            // Validate the payload before sending
+            const validationErrors = validatePatientData(payload);
+            
+            if (validationErrors.length > 0) {
+                displayError('Please correct the following errors:\n' + validationErrors.join('\n'));
+                return;
+            }
+            
+            // Make API call to register the patient with multipart/form-data
             const response = await fetch('https://cardiology-department-system.runasp.net/api/Patient/register', {
-                method: 'POST', // Make sure this matches what the server expects
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
+                method: 'POST',
+                body: payload // No Content-Type header needed for FormData, browser sets it automatically
             });
             
             // Handle specific 405 Method Not Allowed error
             if (response.status === 405) {
-                // Log information for debugging
-                console.error('Method Not Allowed error. Server does not allow POST to this endpoint.');
-                
-                // Try to get more details from response headers
                 const allowHeader = response.headers.get('Allow');
                 let methodNotAllowedMsg = 'Registration failed: The server does not support this operation.';
                 
                 if (allowHeader) {
                     methodNotAllowedMsg += ` Allowed methods are: ${allowHeader}.`;
                     console.info('Allowed methods:', allowHeader);
-                    
-                    // If GET is allowed, we might be using the wrong endpoint
-                    if (allowHeader.includes('GET') && !allowHeader.includes('POST')) {
-                        methodNotAllowedMsg += ' This might be a read-only endpoint.';
-                    }
-                }
-                
-                // Check if we're potentially using the wrong API URL
-                if (window.location.hostname.includes('dev') || 
-                    window.location.hostname.includes('staging') || 
-                    window.location.hostname.includes('test')) {
-                    methodNotAllowedMsg += ' Note: You appear to be on a non-production environment which may have different API configurations.';
                 }
                 
                 throw new Error(methodNotAllowedMsg);
@@ -124,12 +114,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) {
                 let errorMessage = 'Registration failed';
                 
-                // Safely try to parse error response as JSON
                 try {
                     const errorData = await response.json();
                     errorMessage = errorData.message || errorMessage;
                 } catch (jsonError) {
-                    // If JSON parsing fails, try to get text or use status text
                     try {
                         const textError = await response.text();
                         errorMessage = textError || `Registration failed: ${response.statusText}`;
@@ -141,27 +129,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error(errorMessage);
             }
             
-            // Safely parse the successful response
-            let responseData;
-            try {
-                responseData = await response.json();
-            } catch (jsonError) {
-                console.warn('Could not parse success response as JSON:', jsonError);
-                // Continue with the flow even if we couldn't parse the response
-            }
-            
             // Handle successful registration
             alert('Registration successful! You can now log in to your account.');
-            window.location.href = 'login.html'; // Redirect to login page
+            window.location.href = 'login.html';
             
         } catch (error) {
-            // Handle error
             console.error('Registration error:', error);
             displayError(error.message || 'Unknown error occurred during registration');
             
             // Provide recovery guidance for 405 errors
             if (error.message && error.message.includes('Method Not Allowed')) {
-                // Add additional guidance
                 const additionalHelp = document.createElement('div');
                 additionalHelp.className = 'alert alert-info mt-3';
                 additionalHelp.innerHTML = `
@@ -169,27 +146,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     <ul>
                         <li>This appears to be an API configuration issue.</li>
                         <li>Please contact IT support and mention "405 Method Not Allowed" error.</li>
-                        <li>If you're a developer, check that the endpoint URL and HTTP method (POST) are correct.</li>
+                        <li>If you're a developer, verify the endpoint URL and that it accepts POST requests.</li>
                     </ul>
                 `;
                 
                 if (errorContainer) {
                     errorContainer.appendChild(additionalHelp);
-                }
-                
-                // Try with fallback endpoint if available
-                if (window.appConfig && window.appConfig.apiBackupEndpoint) {
-                    const fallbackNotice = document.createElement('div');
-                    fallbackNotice.className = 'alert alert-warning mt-3';
-                    fallbackNotice.innerHTML = 'Attempting to use backup registration service...';
-                    
-                    if (errorContainer) {
-                        errorContainer.appendChild(fallbackNotice);
-                    }
-                    
-                    // In a real app, you might implement retry logic with a fallback endpoint
-                    // This is just a placeholder for the concept
-                    console.log('Would try fallback endpoint:', window.appConfig.apiBackupEndpoint);
                 }
             }
         } finally {
@@ -201,90 +163,105 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.querySelectorAll('.role-option').forEach(option => {
         option.addEventListener('click', () => {
-          const role = option.getAttribute('data-role');
-          if (role === 'patient') {
-            window.location.href = 'register.html'; // replace with your patient page URL
-          } else if (role === 'doctor') {
-            window.location.href = 'doctor.html'; // replace with your doctor page URL
-          }
+            const role = option.getAttribute('data-role');
+            if (role === 'patient') {
+                window.location.href = 'register.html';
+            } else if (role === 'doctor') {
+                window.location.href = 'doctor.html';
+            }
         });
-      });
+    });
     
     // Helper function to display errors consistently
     function displayError(message) {
-        // Find error container if it exists
         const errorContainer = document.getElementById('error-container');
         if (errorContainer) {
             errorContainer.innerHTML = `<div class="alert alert-danger">${message}</div>`;
             errorContainer.scrollIntoView({ behavior: 'smooth' });
         } else {
-            // Fallback to alert
             alert(message);
         }
     }
 });
 
-// Validation function based on API schema requirements
-function validatePatientData(data) {
+// Validation function for FormData payload
+function validatePatientData(formData) {
     const errors = [];
     
+    // Helper function to get values from FormData
+    function getFormValue(key) {
+        return formData.get(key) || (key === 'PhoneNumbers' ? formData.getAll(key) : null);
+    }
+    
     // Name validation
-    if (!data.fName || data.fName.length < 2 || data.fName.length > 50) {
+    const fName = getFormValue('FName');
+    if (!fName || fName.length < 2 || fName.length > 50) {
         errors.push('First name must be between 2 and 50 characters');
     }
     
-    if (!data.lName || data.lName.length < 2 || data.lName.length > 50) {
+    const lName = getFormValue('LName');
+    if (!lName || lName.length < 2 || lName.length > 50) {
         errors.push('Last name must be between 2 and 50 characters');
     }
     
     // Email validation
+    const email = getFormValue('Email');
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!data.email || !emailRegex.test(data.email)) {
+    if (!email || !emailRegex.test(email)) {
         errors.push('Please enter a valid email address');
     }
     
-    // Password validation (in a real app, you'd get this from a password field)
+    // Password validation
+    const password = getFormValue('Password');
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/;
-    if (!data.password || !passwordRegex.test(data.password)) {
+    if (!password || !passwordRegex.test(password)) {
         errors.push('Password must be at least 8 characters and include uppercase, lowercase, number, and special character');
     }
     
-    // Phone validation - assuming Egyptian phone format as in API
+    // Phone validation - Egyptian phone format
     const phoneRegex = /^(?:\+20|0)?1[0125]\d{8}$/;
-    if (!data.phoneNumbers || data.phoneNumbers.length === 0) {
+    const phoneNumbers = formData.getAll('PhoneNumbers'); // Ensure we get all phone numbers as an array
+    if (!phoneNumbers || phoneNumbers.length === 0) {
         errors.push('At least one phone number is required');
-    } else if (!phoneRegex.test(data.phoneNumbers[0])) {
-        errors.push('Please enter a valid primary phone number');
+    } else if (!phoneNumbers.some(phone => phoneRegex.test(phone))) {
+        errors.push('Please enter at least one valid phone number');
     }
     
     // Emergency contact validation
-    if (!data.emergencyContactName || data.emergencyContactName.length < 2) {
+    const emergencyContactName = getFormValue('EmergencyContactName');
+    if (!emergencyContactName || emergencyContactName.length < 2) {
         errors.push('Emergency contact name is required');
     }
     
-    if (!data.emergencyContactPhone || !phoneRegex.test(data.emergencyContactPhone)) {
+    const emergencyContactPhone = getFormValue('EmergencyContactPhone');
+    if (!emergencyContactPhone || !phoneRegex.test(emergencyContactPhone)) {
         errors.push('Please enter a valid emergency contact phone number');
     }
     
-    // Check for other required fields
-    if (!data.gender) errors.push('Gender is required');
-    if (!data.address) errors.push('Address is required');
-    if (!data.parentName) errors.push('Parent name is required');
-    if (!data.link) errors.push('Referral information is required');
+    // Check other required fields
+    if (!getFormValue('Gender')) errors.push('Gender is required');
+    if (!getFormValue('Address')) errors.push('Address is required');
+    if (!getFormValue('ParentName')) errors.push('Parent name is required');
+    if (!getFormValue('Link')) errors.push('Referral information is required');
+    
+    // Birth date validation
+    try {
+        const birthDate = new Date(getFormValue('BirthDate'));
+        if (isNaN(birthDate.getTime())) {
+            errors.push('Invalid birth date');
+        }
+    } catch (e) {
+        errors.push('Invalid birth date format');
+    }
     
     // Blood type validation if provided
-    if (data.bloodType) {
+    const bloodType = getFormValue('BloodType');
+    if (bloodType) {
         const bloodTypeRegex = /^(A|B|AB|O)[+-]$/;
-        if (!bloodTypeRegex.test(data.bloodType)) {
+        if (!bloodTypeRegex.test(bloodType)) {
             errors.push('Please select a valid blood type');
         }
     }
     
     return errors;
-}
-
-// For demo purposes only - in a real app, you would collect this from the user
-function generatePassword() {
-    // This is just a placeholder - you would have password fields in your form
-    return 'Temporary1!';
 }

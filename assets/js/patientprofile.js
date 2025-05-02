@@ -917,22 +917,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Set profile photo if available
         const profilePhoto = document.getElementById('patientPhotoImg');
-if (profilePhoto) {
-  fetch('https://cardiology-department-system.runasp.net/api/Patient/Profile')
-    .then(res => res.json())
-    .then(data => {
-      if (data.photoPath) {
-        profilePhoto.src = `https://cardiology-department-system.runasp.net/api/Patient/Profile/${data.photoPath}`;
-        profilePhoto.onerror = () => {
-          profilePhoto.src = './assets/img/user-placeholder.png'; // Fallback if image fails
-        };
-      }
-    })
-    .catch(err => {
-      console.error("Error loading patient photo:", err);
-      profilePhoto.src = './assets/img/user-placeholder.png'; // Fallback if API fails
-    });
-}
+        if (profilePhoto && data.photoData) {
+            profilePhoto.src = data.photoData;
+            profilePhoto.onerror = function() {
+                this.src = './assets/img/user-placeholder.png';
+            };
+        }
 
         console.log('[UI] Profile display updated successfully');
     }
