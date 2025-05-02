@@ -223,6 +223,7 @@ body {
 .registration-container {
     max-width: 800px;
     margin: 40px auto;
+    height: 60;
     background: var(--card-bg);
     border-radius: 25px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);

@@ -224,12 +224,12 @@
 }
 
 .role-btn:hover {
-    background-color: #e9ecef;
+    background-color: #fc7a8d;
 }
 
 .role-btn input[type="radio"] {
     position: absolute;
-    opacity: 0;
+    opacity: 3;
 }
 
 .role-btn input[type="radio"]:checked + span + label,
@@ -258,7 +258,12 @@
     margin-bottom: 5px;
     transition: transform 0.3s ease;
 }
-
+@supports(selector(:has(*))) {
+    .role-btn:has(input[type="radio"]:checked) {
+        border-color: #F7556D;
+        background-color: #F7556D;
+        color: white;
+    }
 
 
 /* Bubble animation adjustments */
@@ -291,5 +296,4 @@
     border-color: #009ce7;
     box-shadow: 0 0 0 0.2rem rgba(0, 156, 231, 0.25);
 }
-
-
+}

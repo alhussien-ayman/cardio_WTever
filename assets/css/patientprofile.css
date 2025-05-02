@@ -2,26 +2,25 @@
 	11. Header
 -----------------------*/
 
-.header-nav {
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	background-color: #fff;
-	border: 0;
-	border-bottom: 1px solid #f0f0f0;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-	justify-content: space-between;
-	-webkit-justify-content: space-between;
-	-ms-flex-pack: space-between;
-    position: relative;
-	height: 85px;
-	padding: 0 30px;
-	margin-bottom: 0;
+.header {
+    background-color: #fff;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    padding: 0;
+    top: 0;
+    left: 0;
+    right: 0;
 }
+  .header-nav {
+    position: relative;
+    padding: 0 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+  }
 .main-nav {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -326,7 +325,9 @@ body {
 }
 
 .profile-container {
-    max-width: 1100px;
+    margin-top: 70px;
+    top: 40;
+    max-width: 800px;
     margin: 40px auto;
     background: var(--card-bg);
     border-radius: 25px;
@@ -347,7 +348,7 @@ body {
 /* Cardiology Header Styles */
 .cardio-header {
     background: white;
-    padding: 30px 40px 60px;
+    padding: 60px 40px 60px;
     color: var(--text);
     position: relative;
     overflow: hidden;
@@ -1111,11 +1112,6 @@ body {
     background: rgba(255, 87, 34, 0.1);
 }
 
-
-
-
-
-
 /* Patient Photo Styles */
 .patient-photo-container {
     position: relative;
@@ -1168,15 +1164,6 @@ body {
 .cardio-profile.has-photo i.fa-heartbeat {
     display: none;
 }
-
-
-
-
-
-
-
-
-
 
 
 /* Modal Styles */
@@ -1273,26 +1260,8 @@ body {
 }
 
 .edit-profile-btn:hover {
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* Edit Profile Button */
@@ -1362,28 +1331,6 @@ body {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Edit Mode Styles */
 .edit-mode [data-field] {
     background: rgba(247, 85, 109, 0.05);
@@ -1423,7 +1370,7 @@ body {
   
 .edit-btn {
     background: linear-gradient(135deg, #ce7986fb, #F7556D);
-    color: white;
+ 
     margin-top: 20px;
     margin-left: 20px;
 }
@@ -1740,10 +1687,16 @@ select.editable-field {
 
 .footer {
     background-color: #15558d;
+    width: 100%;
 }
 .footer .footer-top {
 	padding: 40px 0;
 }
+.footer .container-fluid {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    max-width: 100%;
+  }
 .footer-title {
     color: #fff;
     font-size: 20px;
@@ -1878,4 +1831,24 @@ select.editable-field {
 }
 .policy-menu li:last-child::after {
     content: "";
+}
+.footer {
+    background-color: #15558d;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.profile-photo-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: 18px;
+    border: 2px solid #fff;
 }
