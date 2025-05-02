@@ -1,83 +1,127 @@
-# ![WebApp](https://iharsh234.github.io/WebApp/images/demo/demo_landing.JPG)
-# WebApp
-<table>
-<tr>
-<td>
-  A webapp using Quandl API to display history of stock growth in a given period of time. It helps predict the growth of stocks from the  charts of stock performace in any period of time. It helps to judge stocks, with the principle of momentum investing, which returns 1% per month on average.
-</td>
-</tr>
-</table>
+
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/GZ21lnOq)
+
+<h1 align="center">
+  <br>
+  <a href="https://cardio-w-tever.vercel.app/index.html"><img src="https://github.com/alhussien-ayman/cardio_WTever/blob/main/assets/img/Logotest.png" alt="Cardiology WTever" width="200"></a>
+  <br>
+  Cardiology WTever
+  <br>
+</h1>
+Team08
+
+# 🫀Cardiology Hospital Information System – Phase 1 Implementation
+Welcome to the Cardiology Hospital Information System (HIS) – your gateway to modern, efficient, and patient-centered heart care management.
+
+Explore the live system:
+https://cardio-w-tever.vercel.app/
+
+---
 
 
-## Demo
-Here is a working live demo :  https://iharsh234.github.io/WebApp/
+### 🔸 ER Model  
+<img src="schemas/ER diagram.png" alt="ER Diagram" width="700"/>
+
+---
+
+### 🔸 Relational Schema  
+<img src="schemas/Relational.png" alt="Relational Model" width="700"/>
+
+## 📌 Project Overview
+This web application serves as a **Cardiology Department Information System**, aiming to enhance healthcare operations through digital transformation. In **Phase 1**, we focused on building the foundational features, including authentication, registration, and patient profile management with a responsive user interface.
+
+---
 
 
-## Site
+## ✅  Implemented Features
 
-### Landing Page
-Currently it is working on all NSE (India) Stocks, BSE (India) Stocks Symbol will be added soon.
+### 🔹1. User Interface Pages
+- **Homepage**: Welcoming interface with department overview and navigation options
+- **Login Page**:Role-based secure login for patients, doctors, and admins 
+- **Registration Page**: Multi-step form for new patient accounts
+- **Profile Page**: Detailed view of patient information with edit capabilities
 
-![](https://iharsh234.github.io/WebApp/images/demo/web_app_face.JPG)
+### 🔹2. Core Functionalities
+- **User Authentication System**
+  - Role-based login (Patient/Doctor/Admin)
+  - Secure password handling
+- **Patient Profile Management**
+  - Personal information section
+  - Medical history tracking
+  - Contact details management
+  - Family and emergency contact information
+- **Responsive Design**
+  - Mobile-friendly layouts
+  - Consistent styling across pages
 
-### Query Filled Form
-![](https://iharsh234.github.io/WebApp/images/demo/demo_query.JPG)
+---
+## 💻 Technical Implementation
 
-### Charts
-![](https://iharsh234.github.io/WebApp/images/demo/demo_chart1.JPG)
-![](https://iharsh234.github.io/WebApp/images/demo/demo_chart2.JPG)
-![](https://iharsh234.github.io/WebApp/images/demo/demo_chart3.JPG)
+### Frontend
+- HTML5/CSS3 for page structure and styling
+- Bootstrap framework for responsive design
+- JavaScript for interactive elements
+- Form validation for data integrity
 
+### Backend 
+- Custom **ER model** and **Relational Schema** tailored to cardiology data requirements 
+- User authentication system planned
+- API endpoints outlined for future development
+---
 
-## Mobile support
-The WebApp is compatible with devices of all sizes and all OS's, and consistent improvements are being made.
+## 🖼️ Our Web  
 
-![](https://iharsh234.github.io/WebApp/images/demo/mobile.png)
+### 🔸 Homepage  
+<img src="readme images/Home page.png " alt="Homepage" width="700"/>
 
+---
 
+### 🔸 Login Page  
+<img src="readme images/Login page.png" alt="Login Page" width="700"/>
 
+---
 
-## [Usage](https://iharsh234.github.io/WebApp/) 
+### 🔸 Registration Process  
+**Step 1 – Personal Information**  
+<img src="readme images/register-01.png" alt="Registration Step 1" width="700"/>
 
-### Development
-Want to contribute? Great!
+**Step 2 – Account Information**  
+<img src="readme images/register-02.png" alt="Registration Step 2" width="700"/>
 
-To fix a bug or enhance an existing module, follow these steps:
+**Step 3 – Contact Information**  
+<img src="readme images/register-03.png" alt="Registration Step 3" width="700"/>
 
-- Fork the repo
-- Create a new branch (`git checkout -b improve-feature`)
-- Make the appropriate changes in the files
-- Add changes to reflect the changes made
-- Commit your changes (`git commit -am 'Improve feature'`)
-- Push to the branch (`git push origin improve-feature`)
-- Create a Pull Request 
+---
 
-### Bug / Feature Request
-
-If you find a bug (the website couldn't handle the query and / or gave undesired results), kindly open an issue [here](https://github.com/iharsh234/WebApp/issues/new) by including your search query and the expected result.
-
-If you'd like to request a new function, feel free to do so by opening an issue [here](https://github.com/iharsh234/WebApp/issues/new). Please include sample queries and their corresponding results.
-
-
-## Built with 
-
-- [jQuery - Ajax](http://www.w3schools.com/jquery/jquery_ref_ajax.asp) - jQuery simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development.
-- [Google Chart API](https://developers.google.com/chart/interactive/docs/quick_start) - Free , Rich Gallery , Customizable and Cross-browser compatible.
-- [Bootstrap](http://getbootstrap.com/) - Extensive list of components and  Bundled Javascript plugins.
+### 🔸 Patient Profile  
+<img src="readme images/Profile page.png" alt="Patient Profile" width="700"/>
 
 
-## To-do
-- Add BSE (India) Symbol to the current App.
-- Decide comparison models of Stocks. (suggestions are most welcome).
-- Another WebApp, capable of comparing at least 10 stocks.
+---
 
-## Team
+## 🔜 Next Steps – Phase 2 Plan  
+- Develop doctor profiles and dashboards
+- Create appointment scheduling system
+- Add medical record management
+- Implement admin dashboard
 
-[![Harsh Vijay](https://avatars1.githubusercontent.com/u/12688534?v=3&s=144)](https://github.com/iharsh234)  | [![Quandl.com](https://github.com/iharsh234/WebApp/blob/master/images/quandl.jpg)](https://www.quandl.com/)
----|---
-[Harsh Vijay ](https://github.com/iharsh234) |[Quandl](https://www.quandl.com)
+---
+###🔸 Backend
+- Developed a cardiology department website using .NET for backend logic.
 
-## [License](https://github.com/iharsh234/WebApp/blob/master/LICENSE.md)
+- Implemented an API to handle communication between system components and external services.
 
-MIT © [Harsh Vijay ](https://github.com/iharsh234)
+- Used JWT (JSON Web Tokens) for secure user authentication and API access.
 
+- Stored and managed data using Neon PostgreSQL, a cloud-native, scalable database solution.
+---
+
+### 👥 Team Members
+
+| Name                         | University ID |
+|------------------------------|---------------|
+| Alhussien Ayman Hanafy       | 9230235       |
+| Ahmed Loay Elsayyed          | 9230164       |
+| Suhila Tharwat Elmasry       | 9230455       |
+| Mai Mahmoud Mohamed          | 9230934       |
+| Muhammad Khaled Abdalhameed | 9230759       |
